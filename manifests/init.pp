@@ -36,10 +36,15 @@ class bacula (
   Boolean $monitor          = true,
   String $device_seltype    = 'bacula_store_t',
   Boolean $use_ssl          = false,
+  Boolean $use_pki          = false,
   Optional[String] $job_tag = undef,
 ){
 
   if $use_ssl {
     include ::bacula::ssl
+  }
+
+  if $use_pki {
+    include ::bacula::pki
   }
 }

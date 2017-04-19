@@ -1,0 +1,5 @@
+<% if scope.lookupvar('bacula::use_pki') -%>
+    PKI Signatures          = yes
+    PKI Encryption          = yes
+    PKI Keypair             = <%= @conf_dir %>/ssl/pki-keypair.pem
+<% end -%>

@@ -54,9 +54,14 @@ class bacula::client (
 
   if $::bacula::use_ssl == true{
     include ::bacula::ssl
-    Service[$services] {
-      subscribe => File[$::bacula::ssl::ssl_files],
-    }
+    File[$::bacula::ssl::ssl_files] ~>
+    Service[$services]
+  }
+
+  if $::bacula::use_pki == true {
+    include ::bacula::pki
+    Concat[$::bacula::pki::pki_keypair] ~>
+    Service[$services]
   }
 
   concat { $config_file:
